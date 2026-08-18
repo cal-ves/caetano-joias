@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caetano Jóias — 45 anos de tradição em ouro e prata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #0b0a08;
+    --black-2: #131110;
+    --ivory: #f3ead6;
+    --ivory-dim: #cdc2a9;
+    --gold: #c9a24a;
+    --gold-bright: #e9c877;
+    --gold-deep: #8a6c26;
+    --wine: #5e1b24;
+    --wine-bright: #7c2733;
+    --line: rgba(201,162,74,0.28);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--ivory);
+    font-family:'EB Garamond', serif;
+    font-size:18px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold-deep); color:var(--ivory);}
+
+  h1,h2,h3{font-family:'Cormorant Garamond', serif; font-weight:600; letter-spacing:0.01em;}
+  .eyebrow{
+    font-family:'Cinzel', serif;
+    font-size:12px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- Texture / grain ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:2;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- Ornamental oval (signature motif) ---------- */
+  .locket{
+    position:relative;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    overflow:hidden;
+  }
+  .locket::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid rgba(201,162,74,0.45);
+    border-radius:50%;
+    z-index:2;
+    pointer-events:none;
+  }
+  .locket img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:saturate(1.05) contrast(1.05);
+  }
+
+  .rule{
+    width:64px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin:0 auto;
+  }
+  .rule.left{margin:0;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:40;
+    background:rgba(11,10,8,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .4s ease, background .4s ease;
+  }
+  .topbar.scrolled{ border-bottom-color:var(--line); }
+  .topbar-inner{
+    max-width:1120px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brandmark{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Cinzel', serif; letter-spacing:0.18em; font-size:14px; color:var(--ivory);
+  }
+  .brandmark .locket{width:30px; height:30px; flex-shrink:0;}
+  .topnav{display:flex; gap:34px; font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ivory-dim);}
+  .topnav a{transition:color .25s;}
+  .topnav a:hover{color:var(--gold-bright);}
+  .burger{
+    display:none;
+    flex-direction:column; justify-content:center; gap:5px;
+    width:38px; height:38px;
+    border:1px solid var(--line);
+    background:none; cursor:pointer;
+    margin-right:8px;
+  }
+  .burger span{ display:block; width:16px; height:1px; background:var(--gold); margin:0 auto; transition:transform .3s ease, opacity .3s ease; }
+  .burger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  .burger.open span:nth-child(2){ opacity:0; }
+  .burger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+  .mobile-menu{
+    max-height:0; overflow:hidden;
+    background:rgba(11,10,8,0.98);
+    border-bottom:1px solid transparent;
+    transition:max-height .4s ease, border-color .4s ease;
+  }
+  .mobile-menu.open{ max-height:340px; border-bottom-color:var(--line); }
+  .mobile-menu-inner{ padding:8px 28px 26px; display:flex; flex-direction:column; }
+  .mobile-menu a{
+    font-family:'Cinzel', serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--ivory-dim); padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .mobile-menu a:hover{ color:var(--gold-bright); }
+  .mobile-menu .top-cta{ margin-top:18px; text-align:center; }
+  .top-cta{
+    font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    border:1px solid var(--gold); padding:10px 20px; color:var(--gold-bright);
+    transition:background .25s, color .25s;
+    white-space:nowrap;
+  }
+  .top-cta:hover{background:var(--gold); color:var(--black);}
+  @media (max-width:820px){
+    .topnav{display:none;}
+    .burger{display:flex;}
+    .topbar-inner > div > .top-cta{display:none;}
+  }
+  @media (min-width:821px){
+    .mobile-menu{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:140px 24px 90px;
+    background-image:
+      linear-gradient(180deg, rgba(11,10,8,0.94), rgba(11,10,8,0.88) 55%, var(--black) 92%),
+      radial-gradient(ellipse 900px 600px at 50% -10%, rgba(201,162,74,0.18), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 85% 90%, rgba(94,27,36,0.24), transparent 60%),
+      url('https://images.pexels.com/photos/20858959/pexels-photo-20858959.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size:cover, auto, auto, cover;
+    background-position:center, center, center, center 30%;
+    background-repeat:no-repeat;
+  }
+  .hero-frame{
+    position:absolute; inset:18px;
+    border:1px solid var(--line);
+    pointer-events:none;
+  }
+  .hero-frame::before,.hero-frame::after{
+    content:"";
+    position:absolute; width:18px; height:18px;
+    border:1px solid var(--gold);
+  }
+  .hero-frame::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .hero-frame::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+  .hero-content{ max-width:760px; }
+  .hero-locket{
+    width:96px; height:96px; margin:0 auto 34px;
+    display:flex; align-items:center; justify-content:center;
+    animation:fadeDown 1s ease both;
+  }
+  .hero-locket span{ font-family:'Cinzel', serif; font-size:26px; color:var(--gold-bright); letter-spacing:2px;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6.4vw, 5rem);
+    font-style:italic;
+    font-weight:500;
+    color:var(--ivory);
+    line-height:1.06;
+    animation:fadeUp 1s .1s ease both;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-eyebrow{ margin-bottom:22px; animation:fadeUp 1s ease both; }
+  .hero p.lede{
+    margin:26px auto 40px; max-width:520px;
+    font-size:20px; color:var(--ivory-dim);
+    animation:fadeUp 1s .2s ease both;
+  }
+  .hero-ctas{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; animation:fadeUp 1s .3s ease both; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Cinzel', serif; font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    padding:16px 30px;
+    border:1px solid var(--gold);
+    transition:all .3s ease;
+  }
+  .btn-solid{ background:var(--gold); color:var(--black); }
+  .btn-solid:hover{ background:var(--gold-bright); box-shadow:0 0 0 6px rgba(201,162,74,0.12); }
+  .btn-ghost{ color:var(--ivory); }
+  .btn-ghost:hover{ border-color:var(--ivory); background:rgba(255,255,255,0.04); }
+
+  .hero-stats{
+    margin-top:64px;
+    display:flex; gap:52px; justify-content:center; flex-wrap:wrap;
+    animation:fadeUp 1s .4s ease both;
+  }
+  .stat{ text-align:center; }
+  .stat b{ display:block; font-family:'Cormorant Garamond', serif; font-size:2rem; color:var(--gold-bright); font-weight:600; }
+  .stat span{ font-family:'Cinzel', serif; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes fadeDown{ from{opacity:0; transform:translateY(-14px) rotate(-4deg);} to{opacity:1; transform:translateY(0) rotate(0);} }
+
+  /* ---------- Section shell ---------- */
+  section{ position:relative; padding:120px 0; }
+
+  /* ---------- Materials ticker ---------- */
+  .ticker{
+    position:relative;
+    overflow:hidden;
+    background:var(--black-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:18px 0;
+  }
+  .ticker-track{
+    display:flex; align-items:center;
+    width:max-content;
+    animation:tickerScroll 34s linear infinite;
+  }
+  .ticker-track span{
+    font-family:'Cinzel', serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--ivory-dim); padding:0 28px; white-space:nowrap;
+  }
+  .ticker-track i{
+    width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; opacity:0.7;
+  }
+  @keyframes tickerScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 64px; }
+  .section-head .eyebrow{ display:block; margin-bottom:14px; }
+  .section-head h2{ font-size:clamp(2rem,4vw,2.8rem); font-style:italic; color:var(--ivory); }
+  .section-head p{ margin-top:18px; color:var(--ivory-dim); font-size:18px; }
+
+  .divider{
+    display:flex; align-items:center; gap:16px;
+    max-width:1120px; margin:0 auto; padding:0 28px;
+  }
+  .divider .rule{ flex:1; }
+  .divider .locket{ width:14px; height:14px; }
+
+  /* ---------- History ---------- */
+  .history{ background:var(--black-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .history-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:center;
+  }
+  .history-visual{
+    position:relative; aspect-ratio:4/5;
+    border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .history-visual img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:saturate(1.05) contrast(1.05);
+  }
+  .history-visual::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(11,10,8,0.05), rgba(11,10,8,0.55) 85%);
+  }
+  .history-caption{
+    position:absolute; left:24px; bottom:22px; z-index:2;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .history-caption strong{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.8rem; color:var(--gold-bright); }
+  .history-caption span{ font-family:'Cinzel', serif; font-size:9px; letter-spacing:0.24em; color:var(--ivory-dim); text-transform:uppercase; }
+  .history-visual .corner{ position:absolute; width:14px; height:14px; border:1px solid var(--gold); z-index:2; }
+  .history-visual .corner.tl{ top:14px; left:14px; border-right:none; border-bottom:none; }
+  .history-visual .corner.br{ bottom:14px; right:14px; border-left:none; border-top:none; }
+
+  .history-text .eyebrow{ display:block; margin-bottom:16px; }
+  .history-text h2{ font-size:clamp(2rem,3.6vw,2.7rem); font-style:italic; margin-bottom:22px; color:var(--ivory); }
+  .history-text p{ color:var(--ivory-dim); margin-bottom:16px; font-size:18px; }
+  .history-text p strong{ color:var(--ivory); font-weight:500; }
+
+  @media (max-width:860px){
+    .history-grid{ grid-template-columns:1fr; gap:44px; }
+    .history-visual{ aspect-ratio:5/4; }
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--black);
+    padding:52px 38px;
+    text-align:center;
+    transition:background .3s ease;
+  }
+  .service-card:hover{ background:var(--black-2); }
+  .service-icon{
+    width:58px; height:58px; margin:0 auto 26px;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--gold); border-radius:50%;
+    color:var(--gold-bright); font-size:22px;
+  }
+  .service-card h3{ font-size:1.5rem; font-style:italic; color:var(--ivory); margin-bottom:12px; }
+  .service-card p{ color:var(--ivory-dim); font-size:16px; }
+
+  @media (max-width:820px){ .services-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Categories ---------- */
+  .categories{ background:var(--black-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .cat-grid{
+    display:grid; grid-template-columns:repeat(6, 1fr); gap:28px;
+  }
+  .cat-item{ text-align:center; }
+  .cat-item .locket{
+    width:88px; height:88px; margin:0 auto 16px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; color:var(--gold-bright);
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .cat-item:hover .locket{ transform:translateY(-6px); border-color:var(--gold-bright); }
+  .cat-item span{ font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim); }
+
+  @media (max-width:860px){ .cat-grid{ grid-template-columns:repeat(3, 1fr); row-gap:40px; } }
+  @media (max-width:480px){ .cat-grid{ grid-template-columns:repeat(2, 1fr); } }
+
+  /* ---------- Buyback (Compramos joias) ---------- */
+  .buyback{
+    position:relative;
+    background:
+      radial-gradient(ellipse 800px 500px at 15% 20%, rgba(94,27,36,0.28), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 80%, rgba(201,162,74,0.14), transparent 60%),
+      var(--black);
+    border-top:1px solid var(--gold-deep);
+    border-bottom:1px solid var(--gold-deep);
+    overflow:hidden;
+  }
+  .buyback-inner{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+  }
+  .buyback .eyebrow{ color:var(--gold-bright); }
+  .buyback h2{
+    font-size:clamp(2.2rem, 4.6vw, 3.4rem);
+    font-style:italic; margin:18px 0 24px; color:var(--ivory);
+  }
+  .buyback h2 em{ color:var(--gold-bright); font-style:italic; }
+  .buyback p.desc{ color:var(--ivory-dim); font-size:19px; margin-bottom:32px; max-width:460px; }
+  .buyback-badges{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px; }
+  .badge{
+    font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    border:1px solid var(--line); padding:10px 16px; color:var(--ivory-dim);
+  }
+  .buyback-points{ display:grid; gap:18px; }
+  .buyback-point{ display:flex; gap:16px; align-items:flex-start; }
+  .buyback-point .mark{
+    flex-shrink:0; width:28px; height:28px; border:1px solid var(--gold); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:var(--gold-bright); font-size:13px; margin-top:2px;
+  }
+  .buyback-point p{ color:var(--ivory-dim); font-size:16px; margin:0; }
+  .buyback-point strong{ color:var(--ivory); font-weight:500; display:block; margin-bottom:2px; font-family:'Cormorant Garamond',serif; font-size:1.15rem; }
+
+  .buyback-visual{
+    position:relative; aspect-ratio:1/1;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:26px;
+    border:1px solid var(--line);
+  }
+  .buyback-visual .corner{ position:absolute; width:14px; height:14px; border:1px solid var(--gold); z-index:2; }
+  .buyback-visual .corner.tl{ top:14px; left:14px; border-right:none; border-bottom:none; }
+  .buyback-visual .corner.br{ bottom:14px; right:14px; border-left:none; border-top:none; }
+  .gem-shape{
+    --cut: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    position:relative;
+    width:58%; aspect-ratio:1/1;
+    clip-path:var(--cut);
+    background:linear-gradient(150deg, var(--gold-bright), var(--gold-deep));
+    padding:2px;
+  }
+  .gem-shape-inner{
+    position:relative;
+    width:100%; height:100%;
+    clip-path:var(--cut);
+    overflow:hidden;
+    background:var(--black);
+  }
+  .gem-shape-inner img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:saturate(1.05) contrast(1.05);
+  }
+  .gem-caption{ text-align:center; }
+  .gem-caption strong{ display:block; font-family:'Cinzel', serif; font-size:12px; letter-spacing:0.18em; color:var(--gold-bright); }
+  .gem-caption span{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.35rem; color:var(--ivory); }
+
+  @media (max-width:900px){ .buyback-inner{ grid-template-columns:1fr; } .buyback-visual{ max-width:340px; margin:0 auto; } }
+
+  /* ---------- Testimonial strip ---------- */
+  .strip{
+    padding:70px 0; text-align:center;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .strip q{
+    display:block; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:clamp(1.4rem,2.6vw,1.9rem);
+    color:var(--ivory); max-width:760px; margin:0 auto 20px;
+    quotes:none;
+  }
+  .strip .who{ font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); }
+
+  /* ---------- Visit / location ---------- */
+  .visit{ background:var(--black-2); }
+  .visit-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px;
+  }
+  .visit-card{ border:1px solid var(--line); padding:44px; }
+  .visit-card h3{ font-family:'Cinzel', serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:22px; }
+  .visit-row{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:17px; }
+  .visit-row:last-child{ border-bottom:none; }
+  .visit-row span:first-child{ color:var(--ivory-dim); }
+  .visit-row span:last-child{ color:var(--ivory); font-weight:500; text-align:right; }
+  .visit-address{ font-size:18px; color:var(--ivory); margin-bottom:10px; }
+  .visit-sub{ color:var(--ivory-dim); font-size:15px; }
+  .visit-map{
+    margin-top:24px; height:160px; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ivory-dim); font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    background:linear-gradient(160deg, #17140f, #0b0a08 70%);
+  }
+
+  @media (max-width:860px){ .visit-grid{ grid-template-columns:1fr; gap:32px; } .visit-card{ padding:32px; } }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align:center;
+    padding:130px 24px;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 100%, rgba(201,162,74,0.14), transparent 60%),
+      var(--black);
+  }
+  .final-cta .locket{ width:70px; height:70px; margin:0 auto 30px; display:flex; align-items:center; justify-content:center; color:var(--gold-bright); font-size:20px; }
+  .final-cta h2{ font-size:clamp(2rem,5vw,3.2rem); font-style:italic; color:var(--ivory); margin-bottom:20px; }
+  .final-cta p{ color:var(--ivory-dim); font-size:19px; max-width:480px; margin:0 auto 40px; }
+  .final-phones{
+    margin-top:44px; display:flex; gap:34px; justify-content:center; flex-wrap:wrap;
+    font-family:'Cinzel', serif; font-size:13px; letter-spacing:0.08em; color:var(--ivory-dim);
+  }
+  .final-phones a{ color:var(--gold-bright); border-bottom:1px solid transparent; transition:border-color .25s; }
+  .final-phones a:hover{ border-color:var(--gold-bright); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:48px 0;
+  }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+  }
+  .footer-brand{ display:flex; align-items:center; gap:12px; font-family:'Cinzel', serif; font-size:13px; letter-spacing:0.16em; color:var(--ivory-dim); }
+  .footer-brand .locket{ width:26px; height:26px; }
+  .footer-links{ display:flex; gap:26px; font-family:'Cinzel', serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim); }
+  .footer-links a:hover{ color:var(--gold-bright); }
+  .footer-note{ font-size:13px; color:var(--ivory-dim); opacity:0.6; text-align:center; margin-top:28px; font-family:'EB Garamond', serif; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .hero-locket, .hero h1, .hero p.lede, .hero-ctas, .hero-stats, .hero-eyebrow{ animation:none; opacity:1; }
+  }
+
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:var(--black); }
+  ::-webkit-scrollbar-thumb{ background:var(--gold-deep); }
+
+  /* ---------- Chain rail (scrollspy signature) ---------- */
+  .chain-rail{
+    display:none;
+    position:fixed; left:38px; top:50%; transform:translateY(-50%);
+    z-index:35;
+    flex-direction:column; align-items:center; gap:38px;
+  }
+  .chain-rail .chain-line{
+    position:absolute; left:50%; top:0; bottom:0; width:1px;
+    transform:translateX(-50%);
+    background:linear-gradient(180deg, transparent, var(--gold-deep) 12%, var(--gold-deep) 88%, transparent);
+    z-index:0;
+  }
+  .chain-node{
+    position:relative; z-index:1;
+    width:9px; height:9px; border-radius:50%;
+    border:1px solid var(--gold);
+    background:var(--black-2);
+    transition:background .35s ease, box-shadow .35s ease, transform .35s ease;
+  }
+  .chain-node::after{
+    content:attr(data-label);
+    position:absolute; left:22px; top:50%; transform:translateY(-50%);
+    font-family:'Cinzel', serif; font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--ivory-dim); white-space:nowrap;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .chain-node:hover::after{ opacity:1; transform:translateY(-50%) translateX(4px); }
+  .chain-node.active{
+    background:var(--gold-bright);
+    box-shadow:0 0 0 4px rgba(201,162,74,0.18);
+    transform:scale(1.15);
+  }
+  .chain-node.active::after{ color:var(--gold-bright); }
+  @media (min-width:1360px){ .chain-rail{ display:flex; } }
+
+  .whatsapp-float{
+    position:fixed; bottom:24px; right:24px; z-index:50;
+    width:58px; height:58px; border-radius:50%;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    transition:transform .25s ease;
+  }
+  .whatsapp-float:hover{ transform:scale(1.08); }
+  .whatsapp-float svg{ width:26px; height:26px; }
+</style>
+</head>
+<body>
+
+<nav class="chain-rail" aria-hidden="true">
+  <div class="chain-line"></div>
+  <a href="#top" class="chain-node active" data-label="Início" data-section="top"></a>
+  <a href="#historia" class="chain-node" data-label="História" data-section="historia"></a>
+  <a href="#servicos" class="chain-node" data-label="Serviços" data-section="servicos"></a>
+  <a href="#pecas" class="chain-node" data-label="Peças" data-section="pecas"></a>
+  <a href="#compramos" class="chain-node" data-label="Compre Ouro" data-section="compramos"></a>
+  <a href="#visite" class="chain-node" data-label="Visite" data-section="visite"></a>
+</nav>
+
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brandmark">
+      <span class="locket"></span>
+      CAETANO JÓIAS
+    </a>
+    <nav class="topnav">
+      <a href="#historia">História</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#pecas">Peças</a>
+      <a href="#compramos">Compramos Ouro</a>
+      <a href="#visite">Visite</a>
+    </nav>
+    <div style="display:flex; align-items:center;">
+      <a class="top-cta" href="https://wa.me/5521998465354" target="_blank" rel="noopener">Whatsapp</a>
+      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="#historia">História</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#pecas">Peças</a>
+      <a href="#compramos">Compramos Ouro</a>
+      <a href="#visite">Visite</a>
+      <a class="top-cta" href="https://wa.me/5521998465354" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-frame"></div>
+  <div class="hero-content">
+    <div class="hero-locket">
+      <div class="locket" style="width:100%; height:100%;"></div>
+    </div>
+    <p class="eyebrow hero-eyebrow">Comercial e Industrial &nbsp;·&nbsp; Rio de Janeiro</p>
+    <h1>Cada peça guarda<br><em>uma história de família</em></h1>
+    <p class="lede">Há 45 anos transformando ouro e prata em joias que atravessam gerações — com fabricação própria, consertos, restauração e peças personalizadas.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5521998465354" target="_blank" rel="noopener" class="btn btn-solid">Falar no WhatsApp</a>
+      <a href="#pecas" class="btn btn-ghost">Ver categorias</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>45</b><span>Anos de tradição</span></div>
+      <div class="stat"><b>100%</b><span>Fabricação própria</span></div>
+      <div class="stat"><b>Ouro&nbsp;&amp;&nbsp;Prata</b><span>Consertos e restauração</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Ouro 18k</span><i></i><span>Prata 950</span><i></i><span>Diamantes</span><i></i><span>Alianças de Família</span><i></i><span>Fabricação Própria</span><i></i><span>Consertos &amp; Restauração</span><i></i>
+    <span>Ouro 18k</span><i></i><span>Prata 950</span><i></i><span>Diamantes</span><i></i><span>Alianças de Família</span><i></i><span>Fabricação Própria</span><i></i><span>Consertos &amp; Restauração</span><i></i>
+  </div>
+</div>
+
+<section class="history" id="historia">
+  <div class="wrap history-grid">
+    <div class="history-visual reveal">
+      <span class="corner tl"></span>
+      <span class="corner br"></span>
+      <img src="https://images.pexels.com/photos/29043373/pexels-photo-29043373.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Vitrine de joias em ouro da Caetano Jóias" loading="lazy">
+      <div class="history-caption">
+        <strong>Caetano Jóias</strong>
+        <span>Desde 1980</span>
+      </div>
+    </div>
+    <div class="history-text reveal">
+      <span class="eyebrow">Nossa história</span>
+      <h2>Tradição de ourives, de pai para filho</h2>
+      <p>A Caetano Jóias nasceu do ofício do ourives — a arte de moldar o ouro e a prata à mão, peça por peça. <strong>Há 45 anos</strong> atendemos famílias que confiam a nós seus momentos mais importantes: alianças de casamento, anéis de formatura, joias de herança.</p>
+      <p>Cada encomenda passa pelas nossas próprias mãos, do desenho à finalização. É esse cuidado artesanal — e não a produção em série — que faz da nossa loja um endereço de confiança <strong>que vale ouro</strong>.</p>
+      <p>Hoje seguimos no mesmo endereço, com o mesmo compromisso: qualidade, atendimento com carinho e uma experiência única em cada visita.</p>
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O que fazemos</span>
+      <h2>Do desenho à peça pronta</h2>
+      <p>Três pilares sustentam quatro décadas e meia de ofício.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon">◆</div>
+        <h3>Joias personalizadas</h3>
+        <p>Peças exclusivas em ouro e prata, desenhadas junto com você para marcar uma data ou contar uma história.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⟳</div>
+        <h3>Consertos e restauração</h3>
+        <p>Devolvemos vida a peças de família — alianças, anéis e cordões — com o cuidado de quem entende de herança.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✧</div>
+        <h3>Fabricação própria</h3>
+        <p>Do desenho ao polimento final, cada joia é feita na nossa oficina, sem intermediários.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories" id="pecas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nossas peças</span>
+      <h2>Um catálogo para cada ocasião</h2>
+    </div>
+    <div class="cat-grid reveal">
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/28933799/pexels-photo-28933799.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Alianças de ouro" loading="lazy"></div><span>Alianças</span></div>
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/1616096/pexels-photo-1616096.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Anéis de ouro" loading="lazy"></div><span>Anéis</span></div>
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/7314466/pexels-photo-7314466.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cordões de ouro" loading="lazy"></div><span>Cordões</span></div>
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/12194316/pexels-photo-12194316.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Pulseiras de ouro" loading="lazy"></div><span>Pulseiras</span></div>
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/6262842/pexels-photo-6262842.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Alianças de moeda" loading="lazy"></div><span>Alianças<br>de moeda</span></div>
+      <div class="cat-item"><div class="locket"><img src="https://images.pexels.com/photos/9838851/pexels-photo-9838851.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Anéis de grau" loading="lazy"></div><span>Anéis<br>de grau</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="buyback" id="compramos">
+  <div class="wrap buyback-inner">
+    <div class="reveal">
+      <span class="eyebrow">Confiança que vale ouro</span>
+      <h2>Compramos joias <em>de família</em></h2>
+      <p class="desc">Ouro, prata, relógios e diamantes. Avaliamos na hora e pagamos o melhor preço — com total segurança e discrição.</p>
+      <div class="buyback-badges">
+        <span class="badge">Ouro</span>
+        <span class="badge">Prata</span>
+        <span class="badge">Relógios</span>
+        <span class="badge">Diamantes</span>
+      </div>
+      <div class="buyback-points">
+        <div class="buyback-point">
+          <span class="mark">$</span>
+          <p><strong>Dinheiro na hora</strong>Pagamento imediato, com segurança e discrição em cada avaliação.</p>
+        </div>
+        <div class="buyback-point">
+          <span class="mark">✓</span>
+          <p><strong>Respeito à sua história</strong>Compramos joias de família com o cuidado de quem entende seu valor sentimental.</p>
+        </div>
+        <div class="buyback-point">
+          <span class="mark">%</span>
+          <p><strong>Melhor preço da praça</strong>Avaliação transparente na hora, sem compromisso.</p>
+        </div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="https://wa.me/5521998465354" target="_blank" rel="noopener" class="btn btn-solid">Avaliar minha joia</a>
+      </div>
+    </div>
+    <div class="buyback-visual reveal">
+      <span class="corner tl"></span>
+      <span class="corner br"></span>
+      <div class="gem-shape">
+        <div class="gem-shape-inner">
+          <img src="https://images.pexels.com/photos/7314460/pexels-photo-7314460.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Joias de ouro de família" loading="lazy">
+        </div>
+      </div>
+      <div class="gem-caption">
+        <strong>Caetano Jóias</strong>
+        <span>Avaliação na hora</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip reveal">
+  <div class="wrap">
+    <q>Aqui, cada detalhe faz a diferença. Produtos de qualidade, atendimento com carinho e uma experiência única em cada visita.</q>
+    <div class="who">— Caetano Jóias, desde sempre no bairro</div>
+  </div>
+</div>
+
+<section class="visit" id="visite">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Venha nos visitar</span>
+      <h2>Loja física, atendimento de perto</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card reveal">
+        <h3>Endereço</h3>
+        <p class="visit-address">Rua Desembargador Itabaiana de Oliveira, nº 22</p>
+        <p class="visit-sub">Loja Caetano Jóias</p>
+        <div class="visit-map">Ver no mapa</div>
+      </div>
+      <div class="visit-card reveal">
+        <h3>Horário de funcionamento</h3>
+        <div class="visit-row"><span>Segunda a sexta</span><span>09:30 — 18:30</span></div>
+        <div class="visit-row"><span>Sábado</span><span>09:30 — 14:00</span></div>
+        <div class="visit-row"><span>Domingo</span><span>Fechado</span></div>
+        <h3 style="margin-top:32px;">Contato</h3>
+        <div class="visit-row"><span>WhatsApp</span><span>(21) 99846-5354</span></div>
+        <div class="visit-row"><span>Telefone</span><span>(21) 99895-5358</span></div>
+        <div class="visit-row"><span>Telefone</span><span>(21) 97290-0703</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="locket" style="display:flex;align-items:center;justify-content:center;">✦</div>
+  <span class="eyebrow">@caetano_joias</span>
+  <h2 style="margin-top:18px;">Fale com a gente</h2>
+  <p>Tire suas dúvidas, encomende uma peça personalizada ou avalie uma joia de família — respondemos rápido pelo WhatsApp.</p>
+  <a href="https://wa.me/5521998465354" target="_blank" rel="noopener" class="btn btn-solid">Chamar no WhatsApp</a>
+  <div class="final-phones">
+    <a href="tel:+5521998955358">(21) 99895-5358</a>
+    <a href="tel:+5521998465354">(21) 99846-5354</a>
+    <a href="tel:+5521972900703">(21) 97290-0703</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand"><span class="locket"></span>CAETANO JÓIAS</div>
+    <div class="footer-links">
+      <a href="#historia">História</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#compramos">Compramos Ouro</a>
+      <a href="https://instagram.com/caetano_joias" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+  <p class="footer-note">Rua Desembargador Itabaiana de Oliveira, nº 22 — 45 anos de tradição em ouro e prata.</p>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5521998465354" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#0b0a08"><path d="M16.02 2.667c-7.363 0-13.353 5.99-13.353 13.353 0 2.354.615 4.65 1.782 6.671L2.667 29.333l6.798-1.78a13.29 13.29 0 0 0 6.55 1.667h.006c7.362 0 13.352-5.99 13.352-13.353S23.383 2.667 16.02 2.667zm0 24.42h-.005a11.05 11.05 0 0 1-5.633-1.542l-.404-.24-4.033 1.058 1.077-3.933-.264-.404a11.026 11.026 0 0 1-1.69-5.885c0-6.104 4.966-11.07 11.073-11.07 2.958 0 5.738 1.153 7.828 3.246a10.998 10.998 0 0 1 3.242 7.83c0 6.103-4.967 11.07-11.09 11.07zm6.07-8.29c-.332-.166-1.965-.97-2.27-1.08-.305-.11-.527-.166-.75.166-.222.332-.86 1.08-1.055 1.302-.194.222-.388.25-.72.083-.332-.166-1.4-.516-2.667-1.646-.986-.88-1.65-1.966-1.844-2.298-.194-.332-.02-.512.145-.677.15-.148.332-.388.498-.582.166-.194.222-.332.332-.554.11-.222.055-.416-.028-.582-.083-.166-.75-1.807-1.027-2.475-.27-.65-.545-.562-.75-.573l-.638-.011c-.222 0-.582.083-.887.416-.305.332-1.163 1.136-1.163 2.77 0 1.634 1.19 3.213 1.356 3.435.166.222 2.343 3.578 5.677 5.017.793.343 1.412.548 1.894.7.796.253 1.52.217 2.093.132.638-.095 1.965-.803 2.242-1.58.277-.775.277-1.44.194-1.58-.083-.138-.305-.222-.638-.388z"/></svg>
+</a>
+
+<script>
+  const topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  try{
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('in'));
+    }
+  } catch(err){
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+  // Safety net: never leave content invisible for more than a moment.
+  window.setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 1800);
+
+  // Chain-rail scrollspy
+  const chainNodes = document.querySelectorAll('.chain-node');
+  const spySections = ['top','historia','servicos','pecas','compramos','visite']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if('IntersectionObserver' in window && chainNodes.length){
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          chainNodes.forEach(n => n.classList.remove('active'));
+          const match = document.querySelector('.chain-node[data-section="' + entry.target.id + '"]');
+          if(match) match.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    spySections.forEach(sec => spy.observe(sec));
+  }
+</script>
+
+</body>
+</html>
